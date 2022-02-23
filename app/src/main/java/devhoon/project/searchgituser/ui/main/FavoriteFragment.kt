@@ -1,10 +1,12 @@
 package devhoon.project.searchgituser.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import devhoon.project.searchgituser.R
 import devhoon.project.searchgituser.databinding.FragmentFavoriteBinding
 import devhoon.project.searchgituser.ui.base.BaseFragment
+import devhoon.project.searchgituser.ui.custom.CustomItemDecoration
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FavoriteFragment: BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
@@ -15,10 +17,18 @@ class FavoriteFragment: BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_
 
         binding {
             mainVm = mainViewModel
+            rvUserList.apply {
+                adapter = UserListAdapter() { position, item ->
+                    mainViewModel.removeFavoriteList(item)
+                }
+                addItemDecoration(CustomItemDecoration())
+            }
         }
 
         observing {
-
+            favoriteUserList.observe(viewLifecycleOwner, {
+                Log.e("Kim", "Size : ${it.size}")
+            })
         }
     }
 

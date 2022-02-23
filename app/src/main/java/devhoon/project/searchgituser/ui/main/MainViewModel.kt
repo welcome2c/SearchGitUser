@@ -34,6 +34,10 @@ class MainViewModel(
 
     private var job: Job? = null
 
+    init {
+        _favoriteUserList.value = mutableListOf()
+    }
+
     fun searchUsers(searchId: String) {
         job?.cancel()
         job = viewModelScope.launch {
@@ -72,12 +76,16 @@ class MainViewModel(
     }
 
     fun addFavoriteList(item: SearchResult) {
+        item.favorite = true
+
         _favoriteUserList.value = _favoriteUserList.value?.apply {
             add(item)
         }
     }
 
     fun removeFavoriteList(item: SearchResult) {
+        item.favorite = false
+
         _favoriteUserList.value = _favoriteUserList.value?.apply {
             remove(item)
         }
