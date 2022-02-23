@@ -1,8 +1,9 @@
 package devhoon.project.searchgituser.di
 
 import devhoon.project.searchgituser.ui.main.MainViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule =  module {
-    single { MainViewModel(get()) }
+    viewModel { MainViewModel(get()) }
 }

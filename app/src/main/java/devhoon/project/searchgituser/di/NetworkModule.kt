@@ -32,24 +32,20 @@ val authInterceptor = object : Interceptor {
     }
 }
 
-val httpClientModule = module {
-    single {
-        OkHttpClient.Builder()
-            .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .addInterceptor(debugInterceptor)
-            .addInterceptor(authInterceptor)
-            .build()
-    }
-}
+val httpClient = OkHttpClient.Builder()
+    .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+    .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+    .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+    .addInterceptor(debugInterceptor)
+    .addInterceptor(authInterceptor)
+    .build()
 
 val githubApiModule = module {
     single {
         Retrofit.Builder()
             .baseUrl(GitHubApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(get())
+            .client(httpClient)
             .build()
             .create(GitHubApi::class.java)
     }
