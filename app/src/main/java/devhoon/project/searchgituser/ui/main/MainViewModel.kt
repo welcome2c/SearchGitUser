@@ -3,15 +3,15 @@ package devhoon.project.searchgituser.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import devhoon.project.searchgituser.data.model.SearchResult
 import devhoon.project.searchgituser.data.repository.SearchUserRepository
-import devhoon.project.searchgituser.data.response.Item
+import devhoon.project.searchgituser.data.response.toPresentation
 import devhoon.project.searchgituser.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -23,15 +23,18 @@ class MainViewModel(
     private val _errorMsg = MutableLiveData<String>()
     val errorMsg: LiveData<String> = _errorMsg
 
-    private val _userList = MutableLiveData<MutableList<Item>>()
-    val userList: LiveData<MutableList<Item>> = _userList
+    private val _userList = MutableLiveData<MutableList<SearchResult>>()
+    val userList: LiveData<MutableList<SearchResult>> = _userList
+
+    private val _favoriteUserList = MutableLiveData<MutableList<SearchResult>>()
+    val favoriteUserList: LiveData<MutableList<SearchResult>> = _favoriteUserList
 
     private var beforeQuery = ""
     private var page = 1
 
     private var job: Job? = null
 
-    fun getUsers(searchId: String) {
+    fun searchUsers(searchId: String) {
         job?.cancel()
         job = viewModelScope.launch {
             _isLoading.value = true
@@ -44,7 +47,7 @@ class MainViewModel(
                     _errorMsg.value = e.toString()
                 }
                 .collect { response ->
-                    _userList.value = response.items.toMutableList()
+                    _userList.value = response.items.toPresentation().toMutableList()
                 }
             _isLoading.value = false
         }
@@ -61,10 +64,22 @@ class MainViewModel(
                 }
                 .collect { response ->
                     _userList.value = _userList.value?.apply {
-                        addAll(response.items.toMutableList())
+                        addAll(response.items.toPresentation())
                     }
                 }
             _isLoading.value = false
+        }
+    }
+
+    fun addFavoriteList(item: SearchResult) {
+        _favoriteUserList.value = _favoriteUserList.value?.apply {
+            add(item)
+        }
+    }
+
+    fun removeFavoriteList(item: SearchResult) {
+        _favoriteUserList.value = _favoriteUserList.value?.apply {
+            remove(item)
         }
     }
 }
