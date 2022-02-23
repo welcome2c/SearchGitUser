@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import devhoon.project.searchgituser.BR
 import devhoon.project.searchgituser.R
+import devhoon.project.searchgituser.data.model.SearchResult
 import devhoon.project.searchgituser.databinding.ItemUserListBinding
 import devhoon.project.searchgituser.ui.base.BaseViewHolder
 
-class UserListAdapter: ListAdapter<Item, UserListAdapter.UserListViewHolder>(DIFF_CALLBACK) {
+class UserListAdapter(
+    val onClickItem: (Int, SearchResult) -> Unit
+) : ListAdapter<SearchResult, UserListAdapter.UserListViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
         return UserListViewHolder(
@@ -20,27 +23,34 @@ class UserListAdapter: ListAdapter<Item, UserListAdapter.UserListViewHolder>(DIF
 
     override fun getItemViewType(position: Int) = position
 
-    override fun submitList(list: List<Item>?) {
+    override fun submitList(list: List<SearchResult>?) {
         super.submitList(list?.let { ArrayList(list) })
     }
 
     override fun onBindViewHolder(holder: UserListViewHolder, position: Int) {
         holder.bindItem(getItem(position))
+        holder.setFavoriteClickListener(position, getItem(position))
     }
 
-    class UserListViewHolder(
+    inner class UserListViewHolder(
         itemId: Int,
         parent: ViewGroup,
         layoutRes: Int
-    ): BaseViewHolder<Item, ItemUserListBinding>(itemId, parent, layoutRes)
+    ) : BaseViewHolder<SearchResult, ItemUserListBinding>(itemId, parent, layoutRes) {
+        fun setFavoriteClickListener(position: Int, item: SearchResult) {
+            itemBinding.icFavorite.setOnClickListener {
+                onClickItem(position, item)
+            }
+        }
+    }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Item>() {
-            override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchResult>() {
+            override fun areItemsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+            override fun areContentsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean {
                 return oldItem.id == newItem.id
             }
         }

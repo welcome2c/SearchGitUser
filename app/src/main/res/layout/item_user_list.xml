@@ -2,7 +2,6 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="item"
             type="devhoon.project.searchgituser.data.model.SearchResult" />
@@ -28,7 +27,7 @@
             android:layout_height="0dp"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/user_id_text_padding"
-            android:text="@{item.id}"
+            android:text="@{item.userid}"
             android:textSize="@dimen/user_id_text_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/iv_profile"
