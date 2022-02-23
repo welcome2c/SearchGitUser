@@ -14,41 +14,41 @@ data class SearchUsersResponse(
     data class Item(
         @SerializedName("avatar_url")
         val avatar_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("events_url")
         val events_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("followers_url")
         val followers_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("following_url")
         val following_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("gists_url")
         val gists_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("gravatar_id")
         val gravatar_id: String,
-        @SerializedName("avatar_url")
+        @SerializedName("html_url")
         val html_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("id")
         val id: Int,
-        @SerializedName("avatar_url")
+        @SerializedName("login")
         val login: String,
-        @SerializedName("avatar_url")
+        @SerializedName("node_id")
         val node_id: String,
-        @SerializedName("avatar_url")
+        @SerializedName("organizations_url")
         val organizations_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("received_events_url")
         val received_events_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("repos_url")
         val repos_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("score")
         val score: Int,
-        @SerializedName("avatar_url")
+        @SerializedName("site_admin")
         val site_admin: Boolean,
-        @SerializedName("avatar_url")
+        @SerializedName("starred_url")
         val starred_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("subscriptions_url")
         val subscriptions_url: String,
-        @SerializedName("avatar_url")
+        @SerializedName("type")
         val type: String,
-        @SerializedName("avatar_url")
+        @SerializedName("url")
         val url: String
     )
 }
@@ -56,6 +56,7 @@ data class SearchUsersResponse(
 fun List<SearchUsersResponse.Item>.toPresentation(): List<SearchResult> {
     return this.map {
         SearchResult(
+            it.id,
             it.login,
             it.avatar_url
         )
