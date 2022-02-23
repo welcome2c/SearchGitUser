@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="profile_width">64</dimen>
-    <dimen name="profile_height">64</dimen>
+    <dimen name="profile_width">64dp</dimen>
+    <dimen name="profile_height">64dp</dimen>
     <dimen name="user_id_text_padding">15dp</dimen>
     <dimen name="user_id_text_size">20sp</dimen>
     <dimen name="favorite_padding">10dp</dimen>
