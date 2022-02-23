@@ -20,6 +20,7 @@ open class BaseFragment<B: ViewDataBinding>(
         savedInstanceState: Bundle?
     ): View {
         dataBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+        dataBinding.lifecycleOwner = this
         return dataBinding.root
     }
 
