@@ -25,7 +25,7 @@ val authInterceptor = object : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val builder = request.newBuilder()
-        builder.addHeader("Authorization", "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")
+        builder.addHeader("Authorization", "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")
         request = builder.build()
 
         return chain.proceed(request)
