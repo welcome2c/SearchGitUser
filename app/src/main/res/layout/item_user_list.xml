@@ -4,7 +4,7 @@
     <data>
         <variable
             name="item"
-            type="devhoon.project.searchgituser.data.model.SearchResult" />
+            type="devhoon.project.searchgituser.ui.model.SearchResult" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
