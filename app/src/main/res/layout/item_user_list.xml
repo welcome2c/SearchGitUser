@@ -42,7 +42,7 @@
             android:layout_height="0dp"
             android:paddingStart="@dimen/favorite_padding"
             android:paddingEnd="@dimen/favorite_padding"
-            android:setSelected="@{item.favorite}"
+            android:setFavoriteSelected="@{item.favorite}"
             android:src="@drawable/sel_ic_favorite"
             app:layout_constraintBaseline_toBottomOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

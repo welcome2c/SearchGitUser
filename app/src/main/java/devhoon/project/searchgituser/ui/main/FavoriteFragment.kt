@@ -17,7 +17,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
         binding {
             mainVm = mainViewModel
             rvUserList.apply {
-                adapter = UserListAdapter() { position, item ->
+                adapter = UserListAdapter() { _, item ->
                     mainViewModel.removeFavoriteList(item)
                 }
                 addItemDecoration(CustomItemDecoration())

@@ -9,7 +9,7 @@ fun ImageView.setProfileImageCircle(url: String) {
     GlideUtil.loadImageTransferCircle(this, url)
 }
 
-@BindingAdapter("android:setSelected")
-fun ImageView.setSelected(isSelected: Boolean) {
+@BindingAdapter("android:setFavoriteSelected")
+fun ImageView.setFavoriteSelected(isSelected: Boolean) {
     this.isSelected = isSelected
 }
