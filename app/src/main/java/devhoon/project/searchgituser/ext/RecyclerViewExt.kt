@@ -2,7 +2,7 @@ package devhoon.project.searchgituser.ext
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import devhoon.project.searchgituser.data.model.SearchResult
+import devhoon.project.searchgituser.ui.model.SearchResult
 import devhoon.project.searchgituser.ui.main.UserListAdapter
 
 @BindingAdapter("android:setItems")

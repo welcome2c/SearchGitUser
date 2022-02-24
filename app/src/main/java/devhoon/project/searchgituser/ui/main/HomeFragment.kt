@@ -10,7 +10,7 @@ import devhoon.project.searchgituser.ui.base.BaseFragment
 import devhoon.project.searchgituser.ui.custom.CustomItemDecoration
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val mainViewModel: MainViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,14 +26,14 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             )
             rvUserList.apply {
                 adapter = UserListAdapter() { position, item ->
-                    if(!item.favorite) mainViewModel.addFavoriteList(item)
+                    if (!item.isFavorite) mainViewModel.addFavoriteList(item)
                     adapter?.notifyItemChanged(position)
                 }
                 addItemDecoration(CustomItemDecoration())
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
-                        if(!canScrollVertically(1)) {
+                        if (!canScrollVertically(1)) {
                             mainViewModel.loadMore()
                         }
                     }
@@ -42,8 +42,8 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
         observing {
-            errorMsg.observe(viewLifecycleOwner) {
-                //SnackBar
+            errorMsg.observe(viewLifecycleOwner) { msg ->
+                showErrorMsg(msg)
             }
         }
     }

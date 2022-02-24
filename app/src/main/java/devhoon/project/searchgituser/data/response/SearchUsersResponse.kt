@@ -1,7 +1,7 @@
 package devhoon.project.searchgituser.data.response
 
 import com.google.gson.annotations.SerializedName
-import devhoon.project.searchgituser.data.model.SearchResult
+import devhoon.project.searchgituser.ui.model.SearchResult
 
 data class SearchUsersResponse(
     @SerializedName("incomplete_results")

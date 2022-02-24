@@ -1,8 +1,8 @@
-package devhoon.project.searchgituser.data.model
+package devhoon.project.searchgituser.ui.model
 
 data class SearchResult(
     val id: Int,
     val userid: String,
     val imgUrl: String,
-    var favorite: Boolean = false
+    var isFavorite: Boolean = false
 )

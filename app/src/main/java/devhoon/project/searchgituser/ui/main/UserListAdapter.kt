@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import devhoon.project.searchgituser.BR
 import devhoon.project.searchgituser.R
-import devhoon.project.searchgituser.data.model.SearchResult
+import devhoon.project.searchgituser.ui.model.SearchResult
 import devhoon.project.searchgituser.databinding.ItemUserListBinding
 import devhoon.project.searchgituser.ui.base.BaseViewHolder
 
